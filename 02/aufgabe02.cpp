@@ -25,7 +25,6 @@ class intList {
 			int i;
 			for( i = 0; i < N; i++ ) {
 				if( this->memory[i] == false ) {
-//					printf("free: %i\n", i);
 					this->memory[i] = true;
 					return &(this->elements[i]);
 				}

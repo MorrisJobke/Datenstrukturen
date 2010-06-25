@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+
+
+
+
+
+    
+
+
+
+
+    
+    
+    
+    
+
+
+
+<head>
+    <link rel="stylesheet" title="normal" type="text/css"
+    href="/shibboleth/wayf.css" /> <title>Identity Provider Selection</title>
+    </head>
+
+<body>
+
+   <br/> <br/> <br/> <br/> 
+
+   <table border="0" align="center" id='dialog' >
+      <tr id='head'>
+         <th colspan="2">
+               TU Chemnitz - Web-Trust-Center 
