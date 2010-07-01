@@ -1,12 +1,15 @@
 #include <stdio.h>
 
+//Typ der IP-Ziffern (0-255)
 typedef unsigned short ipType;
 
+//Deklarationen
 struct ip;
 struct router;
 struct node;
 struct trace;
 
+//struct für eine IP-Adresse (first.second.third.fourth)
 struct ip {
 	ipType first;
 	ipType second;
@@ -14,24 +17,46 @@ struct ip {
 	ipType fourth;
 };
 
+/*	
+struct für einen Router
+	i 		- IP des Routers
+	next	- Zeiger auf nächsten Router (Ringliste)
+	n 		- Zeiger auf ersten Rechner im ROuter-Subnetz
+*/
 struct router {
 	ip* i;
 	router* next;
 	node* n;
 };
 
+/*
+struct für einen Rechner
+	i 		- IP des Rechner
+	r 		- Zeiger auf "eigenen" Router (an dem er angeschlossen ist)
+	pred	- Zeiger auf Vorgänger
+	succ	- Zeiger auf Nachfolger
+*/
 struct node {
 	ip* i;
 	router* r;
-	node* previous;
-	node* next;
+	node* pred;
+	node* succ;
 };
 
+/*
+struct für einen Weg
+	i 		- IP des Wegpunktes (Rechner/Router)
+	next	- Zeiger auf nächsten Wegpunkt (Rechner/Router)
+*/
 struct trace {
 	ip* i;
 	trace* next;
 };
 
+/*
+Funktion, die 2 IP-Adressen dahingehend vergleicht, ob sie im selben Subnetz sind
+Rückgabewert: true/false
+*/
 bool sameSubNet(ip* a, ip* b){
 	if(	a->first == b->first and
 		a->second == b->second and
@@ -41,6 +66,10 @@ bool sameSubNet(ip* a, ip* b){
 	return false;
 }
 
+/*
+Funktion, die 2 IP-Adressen af Gleichheit überprüft
+Rückgabewert: true/false
+*/
 bool sameIp(ip* a, ip* b){
 	if(	a->first == b->first and
 		a->second == b->second and
@@ -50,22 +79,36 @@ bool sameIp(ip* a, ip* b){
 	return false;
 }
 
+/*
+Funktion, die bestimmt, ob sich ein Knoten im Netzwerk befindet (2. Aufgabe)
+Rückgabewert: true/false
+*/
 bool isNode(router* r, ip i){
 	ip* tmp = r->i;
+	// solange i und die IP des ROuters nicht übereinstimmen:
+	//		gehe zum nächsten Router
 	while(not sameSubNet(r->i, &i)){
 		r = r->next;
+		// wieder am Ausgangs-Router angelangt: Abbruch
 		if(sameIp(r->i, tmp))
 			return false;
 	}
+	// Router hat die übergebene IP -> Kein Knoten kann diese IP haben
+	if(sameIp(r->i, i))
+		return false;
 	node* n = r->n;
+	// Router hat keine angeschlossenen Rechner 
 	if(n == NULL)
 		return false;
+	// Solange Liste durchlaufen bis Rechner-IP und i übereinstimmen
 	while(not sameIp(n->i, &i)){
+		// Abbruch bei größerer letzter Stelle (geordnete Liste) oder
+		// wenn es keinen Nachfolger gibt
 		if(	n->i->fourth > i.fourth or
-			n->next == NULL){
+			n->succ == NULL){
 			return false;
 		}
-		n = n->next;
+		n = n->succ;
 	}
 	return true;
 } 
@@ -87,9 +130,9 @@ void print(router* r){
 		printf("router: %i.%i.%i.%i\n", r->i->first, r->i->second, r->i->third, r->i->fourth);
 		node* tmpNode = r->n;
 		while(not isEmpty(tmpNode)){
-			//printf("\tnode: %i.%i.%i.%i\t\town: %i \tprev: %9i \tnext: %i\n", tmpNode->i->first, tmpNode->i->second, tmpNode->i->third, tmpNode->i->fourth, tmpNode, tmpNode->previous, tmpNode->next);
+			//printf("\tnode: %i.%i.%i.%i\t\town: %i \tprev: %9i \tnext: %i\n", tmpNode->i->first, tmpNode->i->second, tmpNode->i->third, tmpNode->i->fourth, tmpNode, tmpNode->pred, tmpNode->next);
 			printf("\tnode: %i.%i.%i.%i\n", tmpNode->i->first, tmpNode->i->second, tmpNode->i->third, tmpNode->i->fourth);
-			tmpNode = tmpNode->next;
+			tmpNode = tmpNode->succ;
 		}
 		r = r->next;
 		if(sameIp(r->i, tmpIp)){
@@ -149,31 +192,31 @@ router* insertNode(router* r, ipType a, ipType b, ipType c, ipType d){
 	tmp->r = tmpRouter;
 	if(tmpRouter->n == NULL){
 		tmpRouter->n = tmp;
-		tmp->next = NULL;
-		tmp->previous = NULL;
+		tmp->succ = NULL;
+		tmp->pred = NULL;
 		return r;
 	}
 	node* tmpNode = tmpRouter->n;
 	while(tmpNode->i->fourth < tmp->i->fourth){
-		if(tmpNode->next == NULL){
-			tmpNode->next = tmp;
-			tmp->previous = tmpNode;
-			tmp->next = NULL;
+		if(tmpNode->succ == NULL){
+			tmpNode->succ = tmp;
+			tmp->pred = tmpNode;
+			tmp->succ = NULL;
 			return r;
 		}		
-		tmpNode = tmpNode->next;	
+		tmpNode = tmpNode->succ;	
 	}
-	if(tmpNode->previous == NULL){
+	if(tmpNode->pred == NULL){
 		tmpRouter->n = tmp;
-		tmpNode->previous = tmp;
-		tmp->next = tmpNode;
-		tmp->previous = NULL;
+		tmpNode->pred = tmp;
+		tmp->succ = tmpNode;
+		tmp->pred = NULL;
 		return r;
 	}
-	tmpNode->previous->next = tmp;
-	tmp->previous = tmpNode->previous;
-	tmp->next = tmpNode;
-	tmpNode->previous = tmp;
+	tmpNode->pred->succ = tmp;
+	tmp->pred = tmpNode->pred;
+	tmp->succ = tmpNode;
+	tmpNode->pred = tmp;
 	return r;
 }
 
@@ -189,10 +232,10 @@ node* getNode(router* r, ip i){
 		return false;
 	while(not sameIp(n->i, &i)){
 		if(	n->i->fourth > i.fourth or
-			n->next == NULL){
+			n->succ == NULL){
 			return false;
 		}
-		n = n->next;
+		n = n->succ;
 	}
 	return n;
 }

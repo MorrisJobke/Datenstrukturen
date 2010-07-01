@@ -3,7 +3,7 @@
 
 class intList {
 	private:		
-		static const int N = 100;
+		static const int N = 1000;
 		
 		struct intElem {
 			int info;
