@@ -1,21 +1,29 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{ngerman}
-\usepackage[ngerman]{babel}
- 
-\date{\today}
-\address{\vspace{1cm} Morris Jobke\\Heideweg 1\\09337 Callenberg}
- 
+%% Dokumentenklasse (Koma Script) -----------------------------------------
+\documentclass[%
+   11pt,              % Schriftgroesse
+   ngerman,           % wird an andere Pakete weitergereicht
+   a4paper,           % Seitengroesse
+   DIV11,             % Textbereichsgroesse (siehe Koma Skript Dokumentation !)
+]{scrartcl}%     Klassen: scrartcl, scrreprt, scrbook
+% -------------------------------------------------------------------------
+
+\usepackage[latin1]{inputenc} % Font Encoding, benoetigt fuer Umlaute
+\usepackage[ngerman]{babel}   % Spracheinstellung
+
+\usepackage[T1]{fontenc} % T1 Schrift Encoding
+\usepackage{textcomp}    % Zusatzliche Symbole (Text Companion font extension)
+\usepackage{lmodern}     % Latin Modern Schrift
+\usepackage{qtree}
+
 \begin{document}
-\begin{letter}{Amt für Ausbildungsförderung\\Frau Richter\\Thüringer Weg 3\\09126 Chemnitz}
-\opening{Sehr geehrte Frau Richter,}
-hiermit möchte ich Ihnen die Aufnahme einer befristeten Nebenbeschäftigung vom 01.04.2010 bis 30.06.2010 mitteilen. Ich werde in diesem Zeitraum voraussichtlich 496,80 Euro verdienen. Im Anhang finden Sie eine Kopie meines Arbeitsvertrages.
+Einfuegen der 4\\
 
-Amts- und Fördernummer: 501-00001211594.6\\
-Geburtstag: 02.09.1990
+\Tree [ .\bf{\textdegree} ]
+\Tree [ .\bf{4(0)} ]
 
-\closing{Mit freundlichen Grüßen,\\ Morris Jobke}
-\encl{Arbeitsvertrag}
-\end{letter}
+\Tree [ .\bf{4(0)} \textdegree \nf{\textdegree} ]
+
+\Tree [ .4(0) $\emptyset$ $\emptyset$ ]
+
 \end{document}
 
