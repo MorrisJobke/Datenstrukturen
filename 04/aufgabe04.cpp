@@ -22,7 +22,7 @@ int length( tree* t ) {
 };
 
 // Aufgabe 1
-// Funktion, die die Balanceinformation in den Baum und seine Unterbäume 
+// Funktion, die die Balance-Information in den Baum und seine Unterbäume 
 // schreibt
 void balance( tree* t ) {
 	if( t->left != NULL )
