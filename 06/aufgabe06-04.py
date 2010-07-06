@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pprint import pprint
-
 A = 0
 C = 1
 D = 2
@@ -13,7 +11,7 @@ R = 6
 S = 7
 Z = 8
 
-a = [[999 for j in range(9) ] for i in range(9)]
+a = [[0 for j in range(9) ] for i in range(9)]
 
 a[A][C] = a[C][A] = 15
 a[C][F] = a[F][C] = 30
@@ -28,15 +26,19 @@ a[G][R] = a[R][G] = 10
 a[L][R] = a[R][L] = 20
 a[S][Z] = a[Z][S] = 10
 
-pprint(a)
+for i in range(9):
+	print "%4i %4i %4i %4i %4i %4i %4i %4i %4i"%tuple(a[i])
+	
+print
 
 for i in range(9):
 	for j in range(9):
 		for k in range(9):
-			#print a[j][i] + a[j][k], a[j][k]
-			if a[j][i] + a[j][k] < a[j][k]:
-				#print "g"
-				a[j][k] = a[j][i] + a[j][k]
-				a[k][j] = a[j][i] + a[j][k]
-
-pprint(a)
+			if a[j][i] and a[i][k] and a[j][k]:
+				if a[j][i] + a[i][k] < a[j][k]:
+					a[j][k] = a[j][i] + a[i][k]
+					a[k][j] = a[j][i] + a[i][k]
+					
+for i in range(9):
+	print "%4i %4i %4i %4i %4i %4i %4i %4i %4i"%tuple(a[i])
+	
