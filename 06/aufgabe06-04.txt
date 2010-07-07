@@ -1,0 +1,38 @@
+Ausgangsadjazenzmatrix:
+      A    C    D    F    G    L    R    S    Z
+ A    0   15    0    0    0    0    0    0    0
+ C   15    0    0   30   10    0   25   10   30
+ D    0    0    0   20    0    0   15    0    0
+ F    0   30   20    0    0    0    0    0    0
+ G    0   10    0    0    0   40   10    0    0
+ L    0    0    0    0   40    0   20    0    0
+ R    0   25   15    0   10   20    0    0    0
+ S    0   10    0    0    0    0    0    0   10
+ Z    0   30    0    0    0    0    0   10    0
+
+Ergebnismatrix:
+      A    C    D    F    G    L    R    S    Z
+ A    0   15    0    0    0    0    0    0    0
+ C   15    0    0   30   10    0   20   10   20
+ D    0    0    0   20    0    0   15    0    0
+ F    0   30   20    0    0    0    0    0    0
+ G    0   10    0    0    0   30   10    0    0
+ L    0    0    0    0   30    0   20    0    0
+ R    0   20   15    0   10   20    0    0    0
+ S    0   10    0    0    0    0    0    0   10
+ Z    0   20    0    0    0    0    0   10    0
+
+Minimale Kosten:
+Aue 		- Chemnitz		15
+Chemnitz	- Freiberg		30
+Chemnitz	- Geithain		10
+Chemnitz	- Riesa			20
+Chemnitz	- Stollberg		10
+Chemnitz	- Zwickau		20
+Dresden		- Freiberg 		20
+Dresden		- Riesa 		15
+Geithain 	- Leipzig 		30
+Geithain 	- Riesa 		10
+Leipzig 	- Riesa 		20
+Stollberg 	- Zwickau 		10
+

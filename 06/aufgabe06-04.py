@@ -11,6 +11,8 @@ R = 6
 S = 7
 Z = 8
 
+t = ["A", "C", "D", "F", "G", "L", "R", "S", "Z"]
+
 a = [[0 for j in range(9) ] for i in range(9)]
 
 a[A][C] = a[C][A] = 15
@@ -26,8 +28,10 @@ a[G][R] = a[R][G] = 10
 a[L][R] = a[R][L] = 20
 a[S][Z] = a[Z][S] = 10
 
+print
+print "%7s %4s %4s %4s %4s %4s %4s %4s %4s"%tuple(t)
 for i in range(9):
-	print "%4i %4i %4i %4i %4i %4i %4i %4i %4i"%tuple(a[i])
+	print "%2s %4i %4i %4i %4i %4i %4i %4i %4i %4i"%tuple([t[i]] + a[i])
 	
 print
 
@@ -39,6 +43,7 @@ for i in range(9):
 					a[j][k] = a[j][i] + a[i][k]
 					a[k][j] = a[j][i] + a[i][k]
 					
+print "%7s %4s %4s %4s %4s %4s %4s %4s %4s"%tuple(t)
 for i in range(9):
-	print "%4i %4i %4i %4i %4i %4i %4i %4i %4i"%tuple(a[i])
+	print "%2s %4i %4i %4i %4i %4i %4i %4i %4i %4i"%tuple([t[i]] + a[i])
 	

@@ -1,4 +1,4 @@
-#include <stdio.h>
+//#include <stdio.h>
 
 #define A 0
 #define C 1
@@ -57,7 +57,7 @@ public:
 	};
 	
 	// Ausgabefunktion für den Graphen und die ermittelten minimalen Kosten
-	void print() {		
+	/*void print() {		
 		for( int i = 0; i < N*N; i++ ) {
 			if( i != 0 and i%N == 0)
 				printf("\n");
@@ -71,7 +71,7 @@ public:
 			printf("%4i", this->costs[i]);		
 		}
 		printf("\n");
-	};
+	};*/
 	
 	// überprüft, ob noch unabgearbeitete Knoten vorhanden sind
 	bool empty() {
@@ -129,6 +129,6 @@ public:
 int main(){
 	dijkstra d;
 	d.start(Z);
-	d.print();
+//	d.print();
 	return 0;
 }
