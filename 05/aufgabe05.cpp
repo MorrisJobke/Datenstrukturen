@@ -9,7 +9,11 @@ private:
 	struct BTreeNodeEntry {
 		BTreeNodeEntry *pred, *succ;
 		BTreeNode* child;
-		int info;	
+		int info;
+		BTreeNodeEntry() {
+			pred = NULL;
+			succ = NULL;
+		};	
 	};
 	
 	BTreeNodeEntry* head;
@@ -19,9 +23,9 @@ private:
 	
 	int order;
 public:
-	BTreeNode( int m) {
+	BTreeNode( int o ) {
 		this->head = NULL;
-		this->order = m;
+		this->order = o;
 	};
 
 	int length() {
@@ -35,18 +39,33 @@ public:
 	};
 	
 	void insert( int key ) {
-		
+		if( this->head == NULL ) {
+			this->head = new BTreeNodeEntry();
+			this->head->info = key;
+		} else {
+			BTreeNodeEntry* tmp = this->head;
+			BTreeNodeEntry* tmpInsert = new BTreeNodeEntry();
+			if( tmp->info > key )
+			{
+			}
+			while( tmp->succ ) {
+				if( tmp->succ->info < key )
+					tmp = tmp->succ;	
+				else
+					break;
+			}
+		}
 	};
 };
 
 class BTree {
 private:
-	int M;
+	int order;
 	BTreeNode* head;
 public:
 	// Konstruktor, der Ordnung m des Baumes übergeben bekommt
 	BTree( int m ) {
-		this->M = m;
+		this->order = m;
 		this->head = NULL;
 	};
 	
@@ -58,6 +77,7 @@ public:
 	// Methode, um einen Schlüssel einzufügen
 	void insert( int key ) {
 		if( this->head == NULL ) {
+			this->head = new BTreeNode( this->order );
 			
 		}
 	};
