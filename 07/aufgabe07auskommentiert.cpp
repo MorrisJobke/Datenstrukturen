@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <time.h>
+//#include <stdlib.h>
 
 // Grenze N der zu sortierenden Zahlen und des Feldes
 const int N = 10;
@@ -37,15 +37,15 @@ int main(){
 	int unsorted[] = {6, 6, 5, 10, 2, 3, 2, 4, 6, 1};
 	
 //	srand(time(NULL));
-	for( int i = 0; i < N; i++ ) {
+//	for( int i = 0; i < N; i++ ) {
 //		unsorted[i] = rand()%N + 1;
-		printf("%3i ", unsorted[i]);
-	}
-	printf("\n");
+//		printf("%3i ", unsorted[i]);
+//	}
+//	printf("\n");
 	int* sorted = mysort(unsorted);
-	for( int i = 0; i < N; i++ ) {
-		printf("%3i ", sorted[i]);
-	}
-	printf("\n");
+//	for( int i = 0; i < N; i++ ) {
+//		printf("%3i ", sorted[i]);
+//	}
+//	printf("\n");
 	return 0;
 }
