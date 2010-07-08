@@ -8,7 +8,7 @@ const int N = 10;
 // Sortierfunktion
 int* mysort( int* a ) {
 	// Feld mit der Anzahl der einzelnen Zahlen	
-	int b[N] = { 0 };
+	int b[N] = { };
 	
 	// 1. Durchlauf des zu sortierenden Feldes und die Ermittlung der Anzahl der
 	// einzelnen Zahlen
