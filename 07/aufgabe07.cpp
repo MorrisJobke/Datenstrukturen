@@ -23,6 +23,8 @@ int* mysort( int* a ) {
 			a[c] = i+1;
 			c++;
 		}
+		// frühzeitiges Abbrechen - wird nicht zwingend benötigt, aber ist 
+		// schneller bei hohem N, aber keine Zahlen in der Nähe von N
 		if( c == N )
 			break;
 	}
