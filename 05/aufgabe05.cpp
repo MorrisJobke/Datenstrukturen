@@ -1,66 +1,53 @@
 #include <stdio.h>
 
-
-
 class BTreeNode {
 private:
+	// Elternknoten
 	BTreeNode* parent;
-	
-	struct BTreeNodeEntry {
-		BTreeNodeEntry *pred, *succ;
-		BTreeNode* child;
-		int info;
-		BTreeNodeEntry() {
-			pred = NULL;
-			succ = NULL;
-		};	
-	};
-	
-	BTreeNodeEntry* head;
-	
-	// first Child
-	BTreeNode* treeChild;
-	
+	// Schlüsselwerte, die gespeichert werden sollen	
+	int* values;
+	// Kind-Knoten
+	BTreeNode** children[4];
+	// Grad der Ordnung des Knotens/Baums
 	int order;
 public:
 	BTreeNode( int o ) {
-		this->head = NULL;
+		this->values = new int[o];			// größeres Array, da Überfüllung
 		this->order = o;
+		BTreeNode** children[o];
+		for( int i = 0; i < o; i++ ) {
+			this->values[i] = NULL;
+			//this->children[i] = NULL;
+		}
 	};
 
 	int length() {
 		int a = 0;
-		BTreeNodeEntry* tmp = this->head;
-		while(tmp != NULL) {
-			tmp = tmp->pred;
-			a++;
-		}
+		
 		return a;
 	};
 	
 	void insert( int key ) {
-		if( this->head == NULL ) {
-			this->head = new BTreeNodeEntry();
-			this->head->info = key;
-		} else {
-			BTreeNodeEntry* tmp = this->head;
-			BTreeNodeEntry* tmpInsert = new BTreeNodeEntry();
-			if( tmp->info > key )
-			{
-			}
-			while( tmp->succ ) {
-				if( tmp->succ->info < key )
-					tmp = tmp->succ;	
-				else
-					break;
-			}
-		}
+		this->values[1] = key;
 	};
+	
+	void print( int indent ) {	
+		this->children[0] = NULL;
+		this->values[1] = 33;	
+		for( int i = 0; i < indent; i++ )
+			printf("\t");	
+		for( int i = 0; i < this->order; i++ )
+			printf("%3i", this->values[i]);
+		printf("\n");
+	}
 };
 
 class BTree {
 private:
 	int order;
+	
+	
+	
 	BTreeNode* head;
 public:
 	// Konstruktor, der Ordnung m des Baumes übergeben bekommt
@@ -78,7 +65,9 @@ public:
 	void insert( int key ) {
 		if( this->head == NULL ) {
 			this->head = new BTreeNode( this->order );
-			
+			this->head->print(0);
+			this->head->insert(key);
+			this->head->print(0);
 		}
 	};
 	
@@ -94,7 +83,8 @@ public:
 };
 
 int main() {
-	BTree b(3);
+	BTree b(5);
+	b.insert(3);
 	
 	return 0;
 }
