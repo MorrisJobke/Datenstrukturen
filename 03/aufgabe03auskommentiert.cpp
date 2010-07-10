@@ -1,5 +1,5 @@
-#include <stdio.h>
-//#define NULL 0
+//#include <stdio.h>
+#define NULL 0
 
 // maximale Länge einer Zeichenkette 100 + NULLBYTE 
 const int size = 101;
@@ -149,11 +149,11 @@ int main() {
 	st.insert(s4);
 	st.insert(s1);
 	st.insert(s5);
-	printf("%s\n", st.exists(s1) ? "t" : "f");
-	printf("%c - %i\n", s1[0], st.count(s1[0]));
-	printf("%c - %i\n", s2[0], st.count(s2[0]));
-	printf("%c - %i\n", s3[0], st.count(s3[0]));
-	printf("%c - %i\n", s4[0], st.count(s4[0]));
-	printf("%c - %i\n", s5[0], st.count(s5[0]));
+//	printf("%s\n", st.exists(s1) ? "t" : "f");
+//	printf("%c - %i\n", s1[0], st.count(s1[0]));
+//	printf("%c - %i\n", s2[0], st.count(s2[0]));
+//	printf("%c - %i\n", s3[0], st.count(s3[0]));
+//	printf("%c - %i\n", s4[0], st.count(s4[0]));
+//	printf("%c - %i\n", s5[0], st.count(s5[0]));
 	return 0;
 };
