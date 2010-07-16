@@ -19,6 +19,8 @@ private:
 	BTreeNodeKey* node;		// Elemente des Knotens	mit ihren jeweils linken
 							// Teilbäumen
 	BTree* right;			// letzter (rechter) Teilbaum
+	
+	bool hasChildren;
 		
 public:
 	// Konstruktor, der Ordnung m des Baumes übergeben bekommt
@@ -27,11 +29,12 @@ public:
 		parent = NULL;
 		node = NULL;
 		right = NULL;
+		hasChildren = false;
 	};
 	
 	// Desktuktor
 	~BTree() {
-	
+		
 	};
 	
 	int length() {
@@ -44,18 +47,17 @@ public:
 	};
 	
 	BTree* getInsertNode( int key ) {
-		BTree* tmp
-		if
+		if( node == NULL )
+			return NULL;
+		
+		
 	};
 	
 	// Methode, um einen Schlüssel einzufügen
 	void insert( int key ) {
-		if( node == NULL )
-			return;
-		else {
-			BTree* tmpNode = getInsertNode( key );
-			BTreeNodeKey* tmp = new BTreeNodeKey( key );
-		}
+		BTree* tmpNode = getInsertNode( key );
+		BTreeNodeKey* tmp = new BTreeNodeKey( key );
+		
 	};
 	
 	// Methode, um zu überprüfen, ob ein Schlüssel existiert
